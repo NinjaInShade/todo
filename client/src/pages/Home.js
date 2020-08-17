@@ -7,21 +7,18 @@ import Card from "../components/Card";
 
 export default function Home(props) {
   const { dark, light, theme, changeHandler } = props;
-
   const colour = theme ? dark : light;
 
   const toggle = (
     <div className="mx-auto mt-4">
-      <Toggle defaultChecked={!theme} onChange={changeHandler} />
+      <Toggle checked={theme} onChange={changeHandler} />
     </div>
   );
-
   const column1 = (
     <h1 className="font-weight-bold pt-4 bigger" style={{ color: colour.light }}>
       Add a todo
     </h1>
   );
-
   const column3 = (
     <h1 className="font-weight-bold pt-4 bigger" style={{ color: colour.light }}>
       Toggle light/dark

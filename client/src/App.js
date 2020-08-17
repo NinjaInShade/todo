@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 import Home from "./pages/Home";
@@ -23,17 +23,39 @@ function App() {
   // true = dark || false = light
   const [theme, setTheme] = useState(false);
 
+  useEffect(() => {
+    const bg = document.body;
+    if (!localStorage.getItem("theme")) {
+      localStorage.setItem("theme", "light");
+    } else {
+      let currentTheme = localStorage.getItem("theme");
+      if (currentTheme === "dark") {
+        setTheme(true);
+        bg.classList.remove("light");
+        bg.classList.add("dark");
+      }
+      if (currentTheme === "light") {
+        setTheme(false);
+        bg.classList.remove("dark");
+        bg.classList.add("light");
+      }
+    }
+  }, []);
+
   function changeHandler() {
     const bg = document.body;
     if (theme) {
+      setTheme(false);
       bg.classList.remove("dark");
       bg.classList.add("light");
+      localStorage.setItem("theme", "light");
     }
     if (!theme) {
+      setTheme(true);
       bg.classList.remove("light");
       bg.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     }
-    setTheme(!theme);
   }
 
   return (

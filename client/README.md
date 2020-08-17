@@ -1,16 +1,12 @@
-# Todo application client built with react.
+# Todo application client built with react and bootstrap.
 
-## Features i would like to apply for frontend:
+## Features i would like frontend to have:
 
 - fetch data from backend
-
-### 3 main columns -
-
 - Add a todo
 - list of todos
-- Not decided, place for dark/light mode toggle (IF user auth is added, maybe a section for scheduled todos?)
-
-- manage a dark/light mode
+- dark/light mode toggle (IF user auth is added, maybe a section for scheduled todos?)
+- manage a dark/light mode in localStorage
 - UI for creating , editing and deleting todos (CRUD)
 
 # Future ideas:
