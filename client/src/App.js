@@ -22,6 +22,7 @@ const darkTheme = {
 function App() {
   // true = dark || false = light
   const [theme, setTheme] = useState(false);
+  const colour = theme ? darkTheme : lightTheme;
 
   useEffect(() => {
     const bg = document.body;
@@ -60,7 +61,7 @@ function App() {
 
   return (
     <React.Fragment>
-      <Home dark={darkTheme} light={lightTheme} theme={theme} changeHandler={changeHandler} />
+      <Home theme={theme} changeHandler={changeHandler} colour={colour} />
     </React.Fragment>
   );
 }

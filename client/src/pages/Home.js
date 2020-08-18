@@ -1,19 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Home.css";
 import "react-toggle/style.css";
 
 import Toggle from "react-toggle";
 import Card from "../components/Card";
+import Button from "../components/Button";
+
+const DUMMY_TODO = [
+  { title: "Todo 1", description: "This is the description for todo 1", key: 1 },
+  { title: "Todo 2", description: "This is the description for todo 2. I had a cheat day yesterday" },
+  { title: "Todo 3", description: "This is the description for todo 3. Diet back on point today!" },
+  { title: "Todo 4", description: "This is the description for todo 4. Gym later. Math too!" },
+  { title: "Todo 5", description: "This is the description for todo 4. Gym later. Math too! Lets get it" },
+];
 
 export default function Home(props) {
-  const { dark, light, theme, changeHandler } = props;
-  const colour = theme ? dark : light;
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [error, setError] = useState("");
+  const { colour, theme, changeHandler } = props;
 
-  const toggle = (
-    <div className="mx-auto mt-4">
-      <Toggle checked={theme} onChange={changeHandler} />
-    </div>
-  );
   const column1 = (
     <h1 className="font-weight-bold pt-4 bigger" style={{ color: colour.light }}>
       Add a todo
@@ -25,12 +31,52 @@ export default function Home(props) {
     </h1>
   );
 
+  const errorMessage = (
+    <div className="alert alert-danger alert-dismissible fade show mt-3 w-75 mx-auto" role="alert">
+      <strong>Invalid!</strong> Make sure no inputs are empty.
+      <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={resetError}>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  );
+
+  function resetError() {
+    setError("");
+  }
+
+  function titleChangeHandler(e) {
+    setTitle(e.target.value);
+  }
+
+  function descriptionChangeHandler(e) {
+    setDescription(e.target.value);
+  }
+
+  function formSubmitHandler(e) {
+    e.preventDefault();
+    if (title && description) {
+      DUMMY_TODO.push({ title, description, key: 6 });
+      setTitle("");
+      setDescription("");
+      setError("");
+    } else {
+      setError(errorMessage);
+    }
+  }
+
   return (
     <div className="row w-100">
       {/* Add todo column */}
       <div className="col sticky-top vh-100 d-flex flex-column align-items-end">
         <section className="mx-4">
-          <Card colour={colour} h="96vh" w="30vw" title={column1}></Card>
+          <Card colour={colour} h="96vh" w="30vw" title={column1} theme={theme}>
+            <form>
+              <input className="form-control form-control-lg w-50 mx-auto mt-5 mb-3" type="text" placeholder="Title" required onChange={titleChangeHandler} value={title} maxLength="20" />
+              <textarea className="form-control w-75 mx-auto mb-3" rows="3" placeholder="Description" required onChange={descriptionChangeHandler} value={description} maxLength="150" />
+              <Button w="75%" text="Add" onClick={formSubmitHandler} submit />
+              {error}
+            </form>
+          </Card>
         </section>
       </div>
 
@@ -46,29 +92,23 @@ export default function Home(props) {
         {/* Todos */}
         <section className="w-100 px-4">
           {/* Map every todo */}
-          <Card colour={colour} w="75%" title="Todo name" todo>
-            Todo info... blah blah Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus asperiores beatae nesciunt culpa reprehenderit, dolores possimus praesentium fuga at maxime est soluta aliquam, nam modi, laborum perspiciatis vel
-            tempore natus. Hic sunt quam earum culpa velit natus. Velit, repudiandae quod ratione explicabo et ipsa voluptatibus esse excepturi quaerat vel totam rerum, facilis harum accusantium nihil fuga blanditiis consequuntur id deleniti. Libero
-            dolorum unde illo adipisci necessitatibus quibusdam perferendis rem aspernatur a praesentium dolorem ab, dolor nihil aperiam, vero iste similique. Voluptatum eos dolor sapiente iusto tenetur natus quibusdam, adipisci commodi?
-          </Card>
-          <Card colour={colour} w="75%" title="Todo name" todo>
-            Todo info... blah blah Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus asperiores beatae nesciunt culpa reprehenderit, dolores possimus praesentium fuga at maxime est soluta aliquam, nam modi, laborum perspiciatis vel
-            tempore natus. Hic sunt quam earum culpa velit natus. Velit, repudiandae quod ratione explicabo et ipsa voluptatibus esse excepturi quaerat vel totam rerum, facilis harum accusantium nihil fuga blanditiis consequuntur id deleniti. Libero
-            dolorum unde illo adipisci necessitatibus quibusdam perferendis rem aspernatur a praesentium dolorem ab, dolor nihil aperiam, vero iste similique. Voluptatum eos dolor sapiente iusto tenetur natus quibusdam, adipisci commodi?
-          </Card>
-          <Card colour={colour} w="75%" title="Todo name" todo>
-            Todo info... blah blah Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus asperiores beatae nesciunt culpa reprehenderit, dolores possimus praesentium fuga at maxime est soluta aliquam, nam modi, laborum perspiciatis vel
-            tempore natus. Hic sunt quam earum culpa velit natus. Velit, repudiandae quod ratione explicabo et ipsa voluptatibus esse excepturi quaerat vel totam rerum, facilis harum accusantium nihil fuga blanditiis consequuntur id deleniti. Libero
-            dolorum unde illo adipisci necessitatibus quibusdam perferendis rem aspernatur a praesentium dolorem ab, dolor nihil aperiam, vero iste similique. Voluptatum eos dolor sapiente iusto tenetur natus quibusdam, adipisci commodi?
-          </Card>
+          {DUMMY_TODO.map((todo, i) => {
+            return (
+              <Card colour={colour} w="75%" title={todo.title} theme={theme} todo key={i}>
+                {todo.description}
+              </Card>
+            );
+          })}
         </section>
       </div>
 
       {/* Dark/Light mode toggle column */}
       <div className="col sticky-top vh-100 d-flex flex-column align-items-start">
         <section className="mx-4">
-          <Card colour={colour} h="96vh" w="30vw" title={column3}>
-            {toggle}
+          <Card colour={colour} h="96vh" w="30vw" title={column3} theme={theme}>
+            <div className="mx-auto mt-4">
+              <Toggle checked={theme} onChange={changeHandler} />
+            </div>
           </Card>
         </section>
       </div>
