@@ -5,7 +5,7 @@ import Button from "./Button";
 
 export default function Card(props) {
   // eslint-disable-next-line
-  const { w, h, title, children, todo, colour } = props;
+  const { w, h, title, children, todo, colour, id } = props;
   const buttons = (
     <div>
       <Button text="Edit" onClick={editHandler} />
@@ -15,15 +15,25 @@ export default function Card(props) {
   );
 
   function editHandler() {
-    console.log("edited");
+    console.log(process.env.REACT_APP_API_URL);
   }
 
-  function deleteHandler() {
-    console.log("deleted");
+  async function deleteHandler() {
+    try {
+      await fetch(`${process.env.REACT_APP_API_URL}/${id}`, { method: "DELETE" });
+      window.location.reload(false);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  function completeHandler() {
-    console.log("completed");
+  async function completeHandler() {
+    try {
+      await fetch(`${process.env.REACT_APP_API_URL}/${id}`, { method: "DELETE" });
+      window.location.reload(false);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (

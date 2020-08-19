@@ -9,7 +9,7 @@ const Todo = require("../models/Todo");
 router.get("/", async function (req, res, next) {
   try {
     const todos = await Todo.find();
-    res.json({ todos });
+    res.status(202).json({ todos });
   } catch (err) {
     const error = new Error("Failed to find");
     error.status = 500;
@@ -23,7 +23,7 @@ router.get("/:id", async function (req, res, next) {
 
   try {
     const todo = await Todo.findById(id);
-    res.json({ todo });
+    res.status(202).json({ todo });
   } catch (err) {
     const error = new Error("Failed to find");
     error.status = 500;
@@ -69,7 +69,7 @@ router.patch("/:id", async function (req, res, next) {
     }
 
     await todo.save();
-    res.json({ todo });
+    res.status(202).json({ todo });
   } catch (err) {
     const error = new Error("Failed to find");
     error.status = 500;
@@ -83,7 +83,7 @@ router.delete("/:id", async function (req, res, next) {
 
   try {
     await Todo.deleteOne({ _id: id });
-    res.json({ message: "successfully deleted" });
+    res.status(202).json({ message: "successfully deleted" });
   } catch (err) {
     const error = new Error("Failed to save");
     error.status = 500;

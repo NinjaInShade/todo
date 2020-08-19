@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.css";
 import "react-toggle/style.css";
 
@@ -6,19 +6,26 @@ import Toggle from "react-toggle";
 import Card from "../components/Card";
 import Button from "../components/Button";
 
-const DUMMY_TODO = [
-  { title: "Todo 1", description: "This is the description for todo 1", key: 1 },
-  { title: "Todo 2", description: "This is the description for todo 2. I had a cheat day yesterday" },
-  { title: "Todo 3", description: "This is the description for todo 3. Diet back on point today!" },
-  { title: "Todo 4", description: "This is the description for todo 4. Gym later. Math too!" },
-  { title: "Todo 5", description: "This is the description for todo 4. Gym later. Math too! Lets get it" },
-];
-
 export default function Home(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
+  const [todos, setTodos] = useState([]);
   const { colour, theme, changeHandler } = props;
+
+  useEffect(function () {
+    async function fetchData() {
+      try {
+        const response = await fetch(process.env.REACT_APP_API_URL);
+        const data = await response.json();
+        setTodos(data.todos);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   const column1 = (
     <h1 className="font-weight-bold pt-4 bigger" style={{ color: colour.light }}>
@@ -52,10 +59,20 @@ export default function Home(props) {
     setDescription(e.target.value);
   }
 
-  function formSubmitHandler(e) {
-    e.preventDefault();
+  async function formSubmitHandler(e) {
     if (title && description) {
-      DUMMY_TODO.push({ title, description, key: 6 });
+      try {
+        await fetch(process.env.REACT_APP_API_URL, {
+          method: "POST",
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ title, description }),
+        });
+      } catch (err) {
+        console.log(err);
+      }
       setTitle("");
       setDescription("");
       setError("");
@@ -92,9 +109,9 @@ export default function Home(props) {
         {/* Todos */}
         <section className="w-100 px-4">
           {/* Map every todo */}
-          {DUMMY_TODO.map((todo, i) => {
+          {todos.map((todo) => {
             return (
-              <Card colour={colour} w="75%" title={todo.title} theme={theme} todo key={i}>
+              <Card colour={colour} w="75%" title={todo.title} theme={theme} todo key={todo._id} id={todo._id}>
                 {todo.description}
               </Card>
             );
