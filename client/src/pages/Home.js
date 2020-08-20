@@ -96,7 +96,6 @@ export default function Home(props) {
           </Card>
         </section>
       </div>
-
       {/* List of todos column */}
       <div className="col d-flex flex-column align-items-center  middleBorder px-0" style={{ borderColor: colour ? colour.darkest : colour.mid }}>
         {/* Heading */}
@@ -118,7 +117,6 @@ export default function Home(props) {
           })}
         </section>
       </div>
-
       {/* Dark/Light mode toggle column */}
       <div className="col sticky-top vh-100 d-flex flex-column align-items-start">
         <section className="mx-4">

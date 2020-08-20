@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Card.css";
 
 import Button from "./Button";
+import Modal from "./Modal";
 
 export default function Card(props) {
-  // eslint-disable-next-line
   const { w, h, title, children, todo, colour, id } = props;
+  const [showEdit, setShowEdit] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+  const [showComplete, setShowComplete] = useState(false);
+
   const buttons = (
     <div>
       <Button text="Edit" onClick={editHandler} />
@@ -15,39 +19,34 @@ export default function Card(props) {
   );
 
   function editHandler() {
-    console.log(process.env.REACT_APP_API_URL);
+    setShowEdit(true);
   }
 
   async function deleteHandler() {
-    try {
-      await fetch(`${process.env.REACT_APP_API_URL}/${id}`, { method: "DELETE" });
-      window.location.reload(false);
-    } catch (err) {
-      console.log(err);
-    }
+    setShowDelete(true);
   }
 
   async function completeHandler() {
-    try {
-      await fetch(`${process.env.REACT_APP_API_URL}/${id}`, { method: "DELETE" });
-      window.location.reload(false);
-    } catch (err) {
-      console.log(err);
-    }
+    setShowComplete(true);
   }
 
   return (
-    <div className={todo ? "mx-auto rounded my-5 py-3 px-3 cardContainer" : "mx-auto rounded py-3 px-3 cardContainer"} style={{ width: w, height: h ? h : "auto", backgroundColor: colour.darkest }}>
-      {todo ? (
-        <h2 className="pb-3" style={{ color: colour.light }}>
-          {title}
-        </h2>
-      ) : (
-        title
-      )}
-      {todo ? <p style={{ color: colour === "dark" ? colour.mid : colour.light }}>{children}</p> : children}
-      {todo && <hr className="mt-5 mb-4" style={{ color: colour === "dark" ? colour.dark : colour.light }} />}
-      {todo && buttons}
-    </div>
+    <React.Fragment>
+      {showEdit && <Modal id={id} type="edit" close={setShowEdit} />}
+      {showDelete && <Modal id={id} type="delete" close={setShowDelete} />}
+      {showComplete && <Modal id={id} type="complete!" close={setShowComplete} />}
+      <div className={todo ? "mx-auto rounded my-5 py-3 px-3 cardContainer" : "mx-auto rounded py-3 px-3 cardContainer"} style={{ width: w, height: h ? h : "auto", backgroundColor: colour.darkest }}>
+        {todo ? (
+          <h2 className="pb-3" style={{ color: colour.light }}>
+            {title}
+          </h2>
+        ) : (
+          title
+        )}
+        {todo ? <p style={{ color: colour === "dark" ? colour.mid : colour.light }}>{children}</p> : children}
+        {todo && <hr className="mt-5 mb-4" style={{ color: colour === "dark" ? colour.dark : colour.light }} />}
+        {todo && buttons}
+      </div>
+    </React.Fragment>
   );
 }

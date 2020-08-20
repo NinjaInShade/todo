@@ -1,4 +1,4 @@
-# Todo application client built with react and bootstrap.
+# Todo application client built with react and bootstrap and (tabler icons)[https://tablericons.com/].
 
 ## Features i would like frontend to have:
 

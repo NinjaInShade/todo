@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 
 import Home from "./pages/Home";
-
 const lightTheme = {
   light: "#000000",
   mid: "#89898D",
