@@ -1,5 +1,9 @@
 # Todo application client built with react and bootstrap and (tabler icons)[https://tablericons.com/].
 
+## PLEASE USE DESKTOP. I tried to make it responsive and it simply has failed. The main functionality is there. Will consider coming back to fix.
+
+## I want to move on to more advanced projects. Probably going to drop bootstrap.
+
 ## Features i would like frontend to have:
 
 - fetch data from backend ✘

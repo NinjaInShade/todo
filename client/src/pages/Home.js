@@ -41,15 +41,11 @@ export default function Home(props) {
   const errorMessage = (
     <div className="alert alert-danger alert-dismissible fade show mt-3 w-75 mx-auto" role="alert">
       <strong>Invalid!</strong> Make sure no inputs are empty.
-      <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={resetError}>
+      <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={() => setError("")}>
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
   );
-
-  function resetError() {
-    setError("");
-  }
 
   function titleChangeHandler(e) {
     setTitle(e.target.value);
@@ -75,7 +71,6 @@ export default function Home(props) {
       }
       setTitle("");
       setDescription("");
-      setError("");
     } else {
       setError(errorMessage);
     }
@@ -84,7 +79,7 @@ export default function Home(props) {
   return (
     <div className="row w-100">
       {/* Add todo column */}
-      <div className="col sticky-top vh-100 d-flex flex-column align-items-end">
+      <div className="col-xs-12 col-lg-4 sticky-lg-top d-flex flex-column addTodo">
         <section className="mx-4">
           <Card colour={colour} h="96vh" w="30vw" title={column1} theme={theme}>
             <form>
@@ -97,9 +92,9 @@ export default function Home(props) {
         </section>
       </div>
       {/* List of todos column */}
-      <div className="col d-flex flex-column align-items-center  middleBorder px-0" style={{ borderColor: colour ? colour.darkest : colour.mid }}>
+      <div className="col-xs-12 col-lg-4 d-flex flex-column align-items-center todoList" style={{ borderColor: colour ? colour.darkest : colour.mid }}>
         {/* Heading */}
-        <section className="sticky-top w-100 py-5 rounded-bottom" style={{ backgroundColor: colour.darkest }}>
+        <section className="sticky-lg-top w-100 py-5 rounded-bottom" style={{ backgroundColor: colour.darkest }}>
           <h1 className="font-weight-bold" style={{ color: colour.light }}>
             My Todos
           </h1>
@@ -118,7 +113,7 @@ export default function Home(props) {
         </section>
       </div>
       {/* Dark/Light mode toggle column */}
-      <div className="col sticky-top vh-100 d-flex flex-column align-items-start">
+      <div className="col-xs-12 col-lg-4 sticky-lg-top d-flex flex-column darkLightMode ">
         <section className="mx-4">
           <Card colour={colour} h="96vh" w="30vw" title={column3} theme={theme}>
             <div className="mx-auto mt-4">
