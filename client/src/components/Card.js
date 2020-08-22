@@ -35,7 +35,7 @@ export default function Card(props) {
       {showEdit && <Modal id={id} type="edit" close={setShowEdit} />}
       {showDelete && <Modal id={id} type="delete" close={setShowDelete} />}
       {showComplete && <Modal id={id} type="complete!" close={setShowComplete} />}
-      <div className={todo ? "mx-auto rounded my-5 py-3 px-3 cardContainer" : "mx-auto rounded py-3 px-3 cardContainer"} style={{ width: w, height: h ? h : "auto", backgroundColor: colour.darkest }}>
+      <div className={todo ? "mx-auto rounded my-5 py-3 px-3 cardContainer" : "mx-auto rounded py-3 px-3 cardContainer customH"} style={{ width: w, height: h ? h : "auto", backgroundColor: colour.darkest }}>
         {todo ? (
           <h2 className="pb-3" style={{ color: colour.light }}>
             {title}

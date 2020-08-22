@@ -11,6 +11,7 @@ export default function Home(props) {
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
   const [todos, setTodos] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { colour, theme, changeHandler } = props;
 
   useEffect(function () {
@@ -19,6 +20,7 @@ export default function Home(props) {
         const response = await fetch(process.env.REACT_APP_API_URL);
         const data = await response.json();
         setTodos(data.todos);
+        setLoading(false);
       } catch (err) {
         console.log(err);
       }
@@ -80,7 +82,7 @@ export default function Home(props) {
     <div className="row w-100">
       {/* Add todo column */}
       <div className="col-xs-12 col-lg-4 sticky-lg-top d-flex flex-column addTodo">
-        <section className="mx-4">
+        <section className="mx-4 mediamargin">
           <Card colour={colour} h="96vh" w="30vw" title={column1} theme={theme}>
             <form>
               <input className="form-control form-control-lg w-50 mx-auto mt-5 mb-3" type="text" placeholder="Title" required onChange={titleChangeHandler} value={title} maxLength="20" />
@@ -92,16 +94,32 @@ export default function Home(props) {
         </section>
       </div>
       {/* List of todos column */}
-      <div className="col-xs-12 col-lg-4 d-flex flex-column align-items-center todoList" style={{ borderColor: colour ? colour.darkest : colour.mid }}>
+      <div className="col-xs-12 col-lg-4 d-flex flex-column  todoList" style={{ borderColor: colour ? colour.darkest : colour.mid }}>
         {/* Heading */}
-        <section className="sticky-lg-top w-100 py-5 rounded-bottom" style={{ backgroundColor: colour.darkest }}>
-          <h1 className="font-weight-bold" style={{ color: colour.light }}>
+        <section className="sticky-lg-top w-100 py-5 rounded-bottom mediapadding " style={{ backgroundColor: colour.darkest }}>
+          <h1 className="font-weight-bold mp2" style={{ color: colour.light }}>
             My Todos
           </h1>
         </section>
 
         {/* Todos */}
-        <section className="w-100 px-4">
+        <section className="w-100 px-4 mediapadding">
+          {loading && (
+            <div className="lds-spinner">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          )}
           {/* Map every todo */}
           {todos.map((todo) => {
             return (
@@ -114,9 +132,9 @@ export default function Home(props) {
       </div>
       {/* Dark/Light mode toggle column */}
       <div className="col-xs-12 col-lg-4 sticky-lg-top d-flex flex-column darkLightMode ">
-        <section className="mx-4">
+        <section className="mx-4 mediapadding mediamargin">
           <Card colour={colour} h="96vh" w="30vw" title={column3} theme={theme}>
-            <div className="mx-auto mt-4">
+            <div className="mx-auto mt-4 mediamargin">
               <Toggle checked={theme} onChange={changeHandler} />
             </div>
           </Card>

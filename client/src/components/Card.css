@@ -5,3 +5,14 @@ h2 {
 .cardContainer {
   text-align: center;
 }
+
+@media (max-width: 992px) {
+  .cardContainer {
+    width: 100vw !important;
+    margin: 20px 0 0 0 !important;
+  }
+
+  .customH {
+    height: auto !important;
+  }
+}
