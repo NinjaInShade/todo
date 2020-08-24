@@ -5,6 +5,7 @@ import "react-toggle/style.css";
 import Toggle from "react-toggle";
 import Card from "../components/Card";
 import Button from "../components/Button";
+import Spinner from "react-bootstrap/Spinner";
 
 export default function Home(props) {
   const [title, setTitle] = useState("");
@@ -13,6 +14,8 @@ export default function Home(props) {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
   const { colour, theme, changeHandler } = props;
+
+  const loadingSpinnerColour = !theme ? "primary" : "dark";
 
   useEffect(function () {
     async function fetchData() {
@@ -58,18 +61,23 @@ export default function Home(props) {
   }
 
   async function formSubmitHandler(e) {
+    e.preventDefault();
     if (title && description) {
       try {
-        await fetch(process.env.REACT_APP_API_URL, {
+        const response = await fetch(process.env.REACT_APP_API_URL, {
           method: "POST",
           headers: {
-            Accept: "application/json, text/plain, */*",
+            "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
+            Accept: "application/json, text/plain, */*",
           },
           body: JSON.stringify({ title, description }),
         });
+        const responseData = await response.json();
+        console.log(responseData);
+        window.location.reload(false);
       } catch (err) {
-        console.log(err);
+        console.log(`${err} .... An error has occurred.`);
       }
       setTitle("");
       setDescription("");
@@ -105,19 +113,10 @@ export default function Home(props) {
         {/* Todos */}
         <section className="w-100 px-4 mediapadding">
           {loading && (
-            <div className="lds-spinner">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
+            <div className="mx-auto">
+              <Spinner animation="border" role="status" className="margin50" variant={loadingSpinnerColour}>
+                <span className="sr-only">Loading...</span>
+              </Spinner>
             </div>
           )}
           {/* Map every todo */}
