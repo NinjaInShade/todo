@@ -79,7 +79,7 @@ export default function Modal(props) {
                 <form className="add-todo-bottom">
                     <label htmlFor="todo_add" style={{color: colour.text}}>Title</label>
                     <div className="add-todo-bottom-input ">
-                        <input type="text" style={{border: `1px solid ${colour.contrast}`, backgroundColor: colour.alternateContrast}} className="add-todo-input" name="todo_add" placeholder="Enter title." required onChange={(e) => setTitle(e.target.value)} value={title} maxLength="20"/>
+                        <input type="text" style={{border: `1px solid ${colour.contrast}`, backgroundColor: colour.alternateContrast}} className="add-todo-input input-fix" name="todo_add" placeholder="Enter title." required onChange={(e) => setTitle(e.target.value)} value={title} maxLength="20"/>
                     </div>
                     {error && <p className="error-text">*{error}</p>}
 

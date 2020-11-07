@@ -70,6 +70,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  padding-bottom: 50px;
 }
 
 .todo {
@@ -110,6 +111,10 @@
   padding: 5px;
 }
 
+.input-fix {
+  max-width: none !important;
+}
+
 .icons-inner {
   margin: 0 25px;
 }
@@ -147,5 +152,9 @@
 
   .icons-inner {
     margin: 0 15px;
+  }
+
+  .input-fix {
+    max-width: 140px !important;
   }
 }
