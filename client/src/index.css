@@ -1,14 +1,7 @@
-body {
-  margin: 0;
-  font-family: "Alata", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 .dark {
-  background-color: #000000;
+  background-color: #fff;
 }
 
 .light {
-  background-color: #dedede;
+  background-color: #ffffff;
 }

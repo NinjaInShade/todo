@@ -1,54 +1,151 @@
-h1 {
-  font-size: 2rem;
-  text-align: center;
+.top-bg {
+  width: 96%;
+  min-height: 300px;
+  border-radius: 8px 8px 0px 0px;
+  position: absolute;
+  top: 2%;
+  left: 2%;
+  right: 2%;
 }
 
-.bigger {
-  font-size: 2.5rem;
+.add-todo-container {
+  background: white;
+  z-index: 2;
+  margin: 100px 0 0 0;
+  min-width: 20%;
+  padding: 25px 20px;
+  border-radius: 8px 8px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  -webkit-box-shadow: 9px 10px 43px -15px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 9px 10px 43px -15px rgba(0, 0, 0, 0.75);
+  box-shadow: 9px 10px 43px -15px rgba(0, 0, 0, 0.75);
 }
 
-.todoList {
-  border-left: 1px solid;
-  border-right: 1px solid;
+.add-todo-text {
+  margin: 10px 0 20px 0;
 }
 
-.darkLightMode {
-  height: 10vh;
+.add-todo-bottom {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 100%;
 }
 
-.row {
-  --bs-gutter-x: 0 !important;
+.add-todo-input {
+  border-radius: 2px;
+  outline: none;
+  padding: 10px 10px;
+  flex-grow: 1;
+  font-size: 1.2rem;
 }
 
-.col-xs-12 {
-  z-index: 1;
+.add-todo-bottom-input {
+  display: flex;
+  margin-top: 10px;
 }
 
-.col-lg-4 {
-  z-index: 1;
+.error-text {
+  margin: 7px 0 0 0;
+  color: #e02d11;
+  font-size: 0.9rem;
 }
 
-.margin50 {
-  margin-left: 45%;
-  margin-top: 10%;
+.placeholder-button {
+  outline: none;
+  border: none;
+  color: white;
+  background: none;
+  padding: 10px 25px;
+  margin-left: 15px;
+  font-size: 1.2rem;
 }
 
-.mp2 {
-  padding-bottom: 40px !important;
+.todo-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-@media (min-width: 992px) {
-  .addTodo {
-    height: 10vh;
+.todo {
+  min-width: 20%;
+  background: white;
+  margin-top: 20px;
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  -webkit-box-shadow: 0px 0px 24px 3px rgba(0, 0, 0, 0.26);
+  -moz-box-shadow: 0px 0px 24px 3px rgba(0, 0, 0, 0.26);
+  box-shadow: 0px 0px 24px 3px rgba(0, 0, 0, 0.26);
+}
+
+.todo p {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  font-size: 1.2rem;
+  margin-top: 10px;
+  word-wrap: break-word;
+}
+
+.text-wrap {
+  width: 360px;
+}
+
+.icons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.icons svg {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.icons-inner {
+  margin: 0 25px;
+}
+
+@media (max-width: 450px) {
+  .add-todo-input {
+    max-width: 140px;
+  }
+
+  .placeholder-button {
+    display: none;
+  }
+
+  .text-wrap {
+    width: 260px;
   }
 }
 
-@media (max-width: 992px) {
-  .mediamargin {
-    margin: 0 !important;
+@media (max-width: 350px) {
+  .add-todo-bottom-input {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
 
-  .mediapadding {
-    padding: 0 !important;
+  .add-todo-button {
+    margin: 20px 0 0 0 !important;
+    padding: 8px 25px;
+    width: 100%;
+  }
+
+  .text-wrap {
+    width: 160px;
+  }
+
+  .icons-inner {
+    margin: 0 15px;
   }
 }

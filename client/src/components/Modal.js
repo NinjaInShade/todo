@@ -9,7 +9,7 @@ export default function Modal(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
-  const { type, id, close } = props;
+  const { type, id, close, colour } = props;
 
   useEffect(
     function () {
@@ -29,23 +29,6 @@ export default function Modal(props) {
     [id]
   );
 
-  const errorMessage = (
-    <div className="alert alert-danger alert-dismissible fade show mt-3 w-75 mx-auto" role="alert">
-      <strong>Invalid!</strong> Make sure no inputs are empty.
-      <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={() => setError("")}>
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-  );
-
-  function titleChangeHandler(e) {
-    setTitle(e.target.value);
-  }
-
-  function descriptionChangeHandler(e) {
-    setDescription(e.target.value);
-  }
-
   async function clickHandler() {
     if (type === "edit") {
       if (title && description) {
@@ -64,7 +47,7 @@ export default function Modal(props) {
         window.location.reload(false);
         setError("");
       } else {
-        setError(errorMessage);
+        setError("Something went wrong!");
       }
     }
     if (type === "delete") {
@@ -90,16 +73,38 @@ export default function Modal(props) {
       <div className="modalOverlay" onClick={() => close(false)}></div>
       <div className="modalContainer">
         <img src={CloseIcon} alt="close" className="modalClose" onClick={() => close(false)} />
-        {type === "edit" && <h2 className="modalTitle">Fill in the form (any unchanged fields stay the same)</h2> && (
-          <form>
-            <input className="form-control form-control-lg w-100 mx-auto mt-5 mb-3" type="text" required onChange={titleChangeHandler} value={title} maxLength="20" />
-            <textarea className="form-control w-75 mx-auto mb-3" rows="3" required onChange={descriptionChangeHandler} value={description} maxLength="150" />
-            {error}
-          </form>
-        )}
-        {type === "delete" && <h2 className="modalTitle">Are you sure you want to delete this todo (cannot go back)</h2>}
-        {type === "complete!" && <h2 className="modalTitle">Are you sure you want to complete this todo (deletes it)</h2>}
-        <Button text={type} onClick={clickHandler} h="20%" w="35%" />
+        {type === "edit" && 
+                <React.Fragment>
+                <h2 className="modalTitle">Fill in the form (any unchanged fields stay the same)</h2>
+                <form className="add-todo-bottom">
+                    <label htmlFor="todo_add" style={{color: colour.text}}>Title</label>
+                    <div className="add-todo-bottom-input ">
+                        <input type="text" style={{border: `1px solid ${colour.contrast}`, backgroundColor: colour.alternateContrast}} className="add-todo-input" name="todo_add" placeholder="Enter title." required onChange={(e) => setTitle(e.target.value)} value={title} maxLength="20"/>
+                    </div>
+                    {error && <p className="error-text">*{error}</p>}
+
+                    <label htmlFor="todo_add" style={{color: colour.text}}>Notes</label>
+                    <div className="add-todo-bottom-input">
+                        <input type="text" style={{border: `1px solid ${colour.contrast}`, background: colour.alternateContrast}} className="add-todo-input" name="todo_add" placeholder="Enter notes." required onChange={(e) => setDescription(e.target.value)} value={description} maxLength="150"/>
+                        <Button colour={colour} onClick={clickHandler} submit>Add</Button>
+                    </div>
+                    {error && <p className="error-text">*{error}</p>}
+                </form>
+                </React.Fragment>
+        }
+        {type === "delete" && 
+        <React.Fragment>
+          <h2 className="modalTitle" style={{color: colour.text}}>Are you sure you want to delete this todo (cannot go back)</h2>
+          <Button onClick={clickHandler} colour={colour}>{type}</Button>
+        </React.Fragment>
+        }
+
+        {type === "complete!" && 
+        <React.Fragment>
+          <h2 className="modalTitle" style={{color: colour.text}}>Are you sure you want to complete this todo (deletes it)</h2>
+          <Button onClick={clickHandler} colour={colour}>{type}</Button>
+        </React.Fragment>
+        }
       </div>
     </React.Fragment>
   );

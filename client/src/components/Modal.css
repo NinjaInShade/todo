@@ -18,7 +18,7 @@
   top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: fit-content;
+  min-width: 20%;
   background: white;
   border-radius: 8px;
   text-align: center;
@@ -27,17 +27,18 @@
 .modalClose {
   cursor: pointer;
   align-self: flex-end;
-  padding-right: 20px;
 }
 
 .modalTitle {
   max-width: 75%;
   padding-top: 10px;
   padding-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 @media (max-width: 560px) {
   .modalContainer {
     margin-right: 30px;
+    top: 50%;
   }
 }

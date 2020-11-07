@@ -1,16 +1,17 @@
 import React from "react";
+import "./Button.css"
 
 export default function Button(props) {
-  const { text, onClick, submit, w, h } = props;
+  const { children, onClick, submit, colour } = props;
 
   return (
     <button
       type={submit ? "submit" : "button"}
-      className={text.toLowerCase() === "delete" ? "btn btn-danger my-2 mx-2" : text.toLowerCase() === "complete!" ? "btn btn-success mx-2 my-2" : "btn btn-info mx-2 my-2"}
+      className="add-todo-button"
       onClick={onClick}
-      style={{ width: w, height: h }}
+      style={{backgroundColor: colour.contrast, color: colour.buttonText}}
     >
-      {text}
+      {children}
     </button>
   );
 }

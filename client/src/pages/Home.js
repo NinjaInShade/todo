@@ -3,18 +3,22 @@ import "./Home.css";
 import "react-toggle/style.css";
 
 import Toggle from "react-toggle";
-import Card from "../components/Card";
+import Modal from "../components/Modal"
 import Button from "../components/Button";
 import Spinner from "react-bootstrap/Spinner";
 
-export default function Home(props) {
+export default function Home({colour, theme, changeHandler}) {
+  const [showEdit, setShowEdit] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+  const [showComplete, setShowComplete] = useState(false);
+  const [currentId, setCurrentId] = useState();
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
+
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { colour, theme, changeHandler } = props;
-
   const loadingSpinnerColour = !theme ? "primary" : "dark";
 
   useEffect(function () {
@@ -32,32 +36,19 @@ export default function Home(props) {
     fetchData();
   }, []);
 
-  const column1 = (
-    <h1 className="font-weight-bold pt-4 bigger" style={{ color: colour.light }}>
-      Add a todo
-    </h1>
-  );
-  const column3 = (
-    <h1 className="font-weight-bold pt-4 bigger" style={{ color: colour.light }}>
-      Toggle light/dark
-    </h1>
-  );
-
-  const errorMessage = (
-    <div className="alert alert-danger alert-dismissible fade show mt-3 w-75 mx-auto" role="alert">
-      <strong>Invalid!</strong> Make sure no inputs are empty.
-      <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={() => setError("")}>
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-  );
-
-  function titleChangeHandler(e) {
-    setTitle(e.target.value);
+  function OpenEditHandler(id){
+    setCurrentId(id)
+    setShowEdit(true)
   }
 
-  function descriptionChangeHandler(e) {
-    setDescription(e.target.value);
+  function OpenDeleteHandler(id){
+    setCurrentId(id)
+    setShowDelete(true)
+  }
+
+  function OpenCompleteHandler(id){
+    setCurrentId(id)
+    setShowComplete(true)
   }
 
   async function formSubmitHandler(e) {
@@ -82,63 +73,58 @@ export default function Home(props) {
       setTitle("");
       setDescription("");
     } else {
-      setError(errorMessage);
+      setError("Something went wrong");
     }
   }
 
   return (
-    <div className="row w-100">
-      {/* Add todo column */}
-      <div className="col-xs-12 col-lg-4 sticky-lg-top d-flex flex-column addTodo">
-        <section className="mx-4 mediamargin">
-          <Card colour={colour} h="96vh" w="30vw" title={column1} theme={theme}>
-            <form>
-              <input className="form-control form-control-lg w-50 mx-auto mt-5 mb-3" type="text" placeholder="Title" required onChange={titleChangeHandler} value={title} maxLength="20" />
-              <textarea className="form-control w-75 mx-auto mb-3" rows="3" placeholder="Description" required onChange={descriptionChangeHandler} value={description} maxLength="150" />
-              <Button w="75%" text="Add" onClick={formSubmitHandler} submit />
-              {error}
-            </form>
-          </Card>
-        </section>
-      </div>
-      {/* List of todos column */}
-      <div className="col-xs-12 col-lg-4 d-flex flex-column  todoList" style={{ borderColor: colour ? colour.darkest : colour.mid }}>
-        {/* Heading */}
-        <section className="sticky-lg-top w-100 py-5 rounded-bottom mediapadding " style={{ backgroundColor: colour.darkest }}>
-          <h1 className="font-weight-bold mp2" style={{ color: colour.light }}>
-            My Todos
-          </h1>
-        </section>
+    <React.Fragment>
+      {showEdit && <Modal colour={colour} id={currentId} type="edit" close={setShowEdit} />}
+      {showDelete && <Modal colour={colour} id={currentId} type="delete" close={setShowDelete} />}
+      {showComplete && <Modal colour={colour} id={currentId} type="complete!" close={setShowComplete} />}
+      <section className="top-bg" style={{backgroundColor: colour.contrast}}></section>
 
-        {/* Todos */}
-        <section className="w-100 px-4 mediapadding">
-          {loading && (
-            <div className="mx-auto">
-              <Spinner animation="border" role="status" className="margin50" variant={loadingSpinnerColour}>
+        <section className="todo-list">
+        <div className="add-todo-container">
+                <Toggle checked={theme} onChange={changeHandler} />
+                <h2 className="add-todo-text" style={{color: colour.text}}>Add todo:</h2>
+                <form className="add-todo-bottom">
+                    <label htmlFor="todo_add" style={{color: colour.text}}>Title</label>
+                    <div className="add-todo-bottom-input ">
+                        <input type="text" style={{border: `1px solid ${colour.contrast}`, backgroundColor: colour.alternateContrast}} className="add-todo-input" name="todo_add" placeholder="Enter title." required onChange={(e) => setTitle(e.target.value)} value={title} maxLength="20"/>
+                    </div>
+                    {error && <p className="error-text">*{error}</p>}
+
+                    <label htmlFor="todo_add" style={{color: colour.text}}>Notes</label>
+                    <div className="add-todo-bottom-input">
+                        <input type="text" style={{border: `1px solid ${colour.contrast}`, background: colour.alternateContrast}} className="add-todo-input" name="todo_add" placeholder="Enter notes." required onChange={(e) => setDescription(e.target.value)} value={description} maxLength="150"/>
+                        <Button colour={colour} onClick={formSubmitHandler} submit>Add</Button>
+                    </div>
+                    {error && <p className="error-text">*{error}</p>}
+                </form>
+            </div>
+
+            {loading ?  
+              <Spinner animation="border" role="status"  className="spinner-margin" variant={loadingSpinnerColour}>
                 <span className="sr-only">Loading...</span>
-              </Spinner>
-            </div>
-          )}
-          {/* Map every todo */}
-          {todos.map((todo) => {
-            return (
-              <Card colour={colour} w="75%" title={todo.title} theme={theme} todo key={todo._id} id={todo._id}>
-                {todo.description}
-              </Card>
-            );
-          })}
+              </Spinner> : 
+              todos.map(todo => {
+                return (
+                  <div className="todo" key={todo._id}>
+                    <div className="icons">
+                      <button onClick={() => OpenEditHandler(todo._id)}><i className="fas fa-edit fa-2x" style={{color: colour.alternateText}}></i></button>
+                      <button onClick={() => OpenDeleteHandler(todo._id)}><i className="fas fa-trash fa-2x icons-inner" style={{color: colour.alternateText}}></i></button>
+                      <button onClick={() => OpenCompleteHandler(todo._id)}><i className="fas fa-check-circle fa-2x" style={{color: colour.alternateText}}></i></button>
+                    </div>
+                    <hr style={{border: `1px solid ${colour.alternateText}`}}/>
+                    <div className="text-wrap">
+                      <h3 style={{color: colour.text}}>{todo.title}</h3>
+                      <p style={{color: colour.alternateText}}>{todo.description}</p>
+                  </div>
+               </div>
+                )
+            })}
         </section>
-      </div>
-      {/* Dark/Light mode toggle column */}
-      <div className="col-xs-12 col-lg-4 sticky-lg-top d-flex flex-column darkLightMode ">
-        <section className="mx-4 mediapadding mediamargin">
-          <Card colour={colour} h="96vh" w="30vw" title={column3} theme={theme}>
-            <div className="mx-auto mt-4 mediamargin">
-              <Toggle checked={theme} onChange={changeHandler} />
-            </div>
-          </Card>
-        </section>
-      </div>
-    </div>
+    </React.Fragment>
   );
 }
