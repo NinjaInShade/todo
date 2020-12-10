@@ -6,9 +6,9 @@
 
 ## Features i would like frontend to have:
 
-- fetch data from backend ✘
-- Add a todo ✘
-- list of todos ✘
+- fetch data from backend ✔
+- Add a todo ✔
+- list of todos ✔
 - dark/light mode toggle ✔
 - manage a dark/light mode in localStorage ✔
 - UI for creating , editing and deleting todos (CRUD) ✔
