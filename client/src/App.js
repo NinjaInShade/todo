@@ -1,68 +1,39 @@
 import React, { useState, useEffect } from "react";
 
 import Home from "./pages/Home";
-const lightTheme = {
-  contrast: "#3CA7D1",
-  alternateContrast:"#B5E6FA",
-  base: "#fff",
-  text: "#000",
-  alternateText: "#686464",
-  buttonText: "#fff"
-};
-
-const darkTheme = {
-  contrast: "#45297d",
-  alternateContrast:"#a981f7",
-  base: "#fff",
-  text: "#000",
-  alternateText: "#686464",
-  buttonText: "#fff"
-};
 
 function App() {
-  // true = dark || false = light
-  const [theme, setTheme] = useState(false);
-  const colour = theme ? darkTheme : lightTheme;
+  const [theme, setTheme] = useState("light");
 
   useEffect(() => {
-    const bg = document.body;
+    // Set default light theme for user's first load
     if (!localStorage.getItem("theme")) {
       localStorage.setItem("theme", "light");
     } else {
-      let currentTheme = localStorage.getItem("theme");
-      if (currentTheme === "dark") {
-        setTheme(true);
-        bg.classList.remove("light");
-        bg.classList.add("dark");
-      }
+      const currentTheme = localStorage.getItem("theme");
+
       if (currentTheme === "light") {
-        setTheme(false);
-        bg.classList.remove("dark");
-        bg.classList.add("light");
+        return setTheme("light");
       }
+
+      setTheme("dark");
     }
   }, []);
 
   function changeHandler() {
-    const bg = document.body;
-    if (theme) {
-      setTheme(false);
-      bg.classList.remove("dark");
-      bg.classList.add("light");
-      localStorage.setItem("theme", "light");
+    if (theme === "light") {
+      setTheme("dark");
+      return localStorage.setItem("theme", "dark");
     }
-    if (!theme) {
-      setTheme(true);
-      bg.classList.remove("light");
-      bg.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    }
+
+    setTheme("light");
+    localStorage.setItem("theme", "light");
   }
 
   return (
-    <React.Fragment>
-      <Home theme={theme} changeHandler={changeHandler} colour={colour} />
-    </React.Fragment>
+    <>
+      <Home theme={theme} changeHandler={changeHandler} />
+    </>
   );
 }
 
