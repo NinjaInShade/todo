@@ -33,10 +33,17 @@ router.get("/:id", async function (req, res, next) {
 
 // POST - create new todo
 router.post("/", async function (req, res, next) {
-  const { title, description } = req.body;
+  const { title } = req.body;
+
+  if (!title || title.length === 0) {
+    return res.status(404).json({
+      error: "Cannot be empty",
+    });
+  }
+
   const todo = new Todo({
     title,
-    description,
+    completed: false,
   });
 
   try {
@@ -47,28 +54,25 @@ router.post("/", async function (req, res, next) {
     return next(error);
   }
 
-  res.status(202).json({ message: "Todo successfully created!" });
+  res.status(202).json({ message: "Todo successfully created!", todo });
 });
 
 // PATCH - update a todo by ID
 router.patch("/:id", async function (req, res, next) {
   const id = req.params.id;
-  const { title, description } = req.body;
+  const { title, completed } = req.body;
 
   try {
     const todo = await Todo.findById(id);
     if (!todo) {
-      res.json({ message: "no todo found" });
+      return res.json({ message: "no todo found" });
     }
 
-    if (title) {
-      todo.title = title;
-    }
-    if (description) {
-      todo.description = description;
-    }
+    todo.title = title;
+    todo.completed = completed;
 
     await todo.save();
+
     res.status(202).json({ todo });
   } catch (err) {
     const error = new Error("Failed to find");

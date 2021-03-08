@@ -9,7 +9,7 @@
 }
 
 .custom-checkbox:hover {
-  border: 1px solid rgba(87, 221, 240, 1);
+  border: 1px solid var(--primary-bright-blue);
 }
 
 .custom-checkbox-dark {

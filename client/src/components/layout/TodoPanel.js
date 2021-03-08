@@ -5,11 +5,25 @@ import LoadingSpinner from "../LoadingSpinner";
 
 import "./TodoPanel.css";
 
-export default function TodoPanel({ loading, todos, theme }) {
+export default function TodoPanel({ loading, setTodos, todos, theme }) {
   const [value, setValue] = useState("");
 
   function createTodo() {
-    setValue("");
+    fetch(process.env.REACT_APP_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: value }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setValue("");
+        setTodos((prevState) => ({ ...prevState, todos: [...prevState.todos, data.todo] }));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (

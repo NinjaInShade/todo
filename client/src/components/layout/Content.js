@@ -5,7 +5,7 @@ import sun from "../../assets/icon-sun.svg";
 
 import "./Content.css";
 
-export default function Content({ theme, changeHandler, todos, loading }) {
+export default function Content({ theme, changeHandler, todos, setTodos, loading }) {
   return (
     <section className="content-container">
       <header className="header">
@@ -14,7 +14,7 @@ export default function Content({ theme, changeHandler, todos, loading }) {
           <img src={theme === "dark" ? sun : moon} alt="change theme icon" />
         </button>
       </header>
-      <TodoPanel todos={todos} loading={loading} theme={theme} />
+      <TodoPanel todos={todos} setTodos={setTodos} loading={loading} theme={theme} />
     </section>
   );
 }

@@ -1,18 +1,14 @@
 // Setting up express and other middleware
 const express = require("express");
-const app = express();
-const bodyParser = require("body-parser");
-const cors = require("cors");
 require("dotenv").config();
-// Setting up mongoose
+const app = express();
+const cors = require("cors");
 const mongoose = require("mongoose");
-// Controllers
 const TodoController = require("./controllers/TodoController");
 
 // Middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 app.use(cors());
+app.use(express.json());
 
 // Route forwarding
 app.use("/api/todos", TodoController);
@@ -26,8 +22,7 @@ app.use(function (req, res, next) {
 
 // Error handler
 app.use(function (error, req, res, next) {
-  res.status(error.status || 500);
-  res.send({
+  res.status(error.status || 500).send({
     error: {
       status: error.status || 500,
       message: error.message,
