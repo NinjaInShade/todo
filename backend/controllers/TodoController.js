@@ -68,7 +68,10 @@ router.patch("/:id", async function (req, res, next) {
       return res.json({ message: "no todo found" });
     }
 
-    todo.title = title;
+    if (title) {
+      todo.title = title;
+    }
+
     todo.completed = completed;
 
     await todo.save();

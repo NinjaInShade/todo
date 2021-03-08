@@ -33,3 +33,13 @@
   right: 20px;
   transform: translateY(-50%);
 }
+
+.todo-completed {
+  color: var(--light-grayish-blue);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+.todo-completed-dark {
+  color: var(--d-very-dark-grayish-blue);
+}

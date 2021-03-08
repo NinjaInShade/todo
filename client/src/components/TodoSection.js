@@ -7,7 +7,27 @@ import "./TodoSection.css";
 export default function TodoSection({ todos, setTodos, todo, theme, borderRadius }) {
   const [hovered, setHovered] = useState(false);
 
-  function completeTodo() {}
+  function completeTodo() {
+    const updated_todos = { todos: [...todos.todos] };
+    const existing_todo_index = todos.todos.findIndex((todoState) => todoState._id === todo._id);
+
+    fetch(`${process.env.REACT_APP_API_URL}/${todo._id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ completed: !todo.completed }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        updated_todos.todos[existing_todo_index].completed = data.todo.completed;
+
+        setTodos(updated_todos);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   function deleteTodo() {
     const updated_todos = todos.todos.filter((todoState) => todoState._id !== todo._id);
@@ -32,8 +52,14 @@ export default function TodoSection({ todos, setTodos, todo, theme, borderRadius
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <Checkbox add={false} onClick={completeTodo} theme={theme} />
-      <p className={`todo-title ${theme === "dark" ? "todo-title-dark" : ""}`}>{todo.title}</p>
+      <Checkbox add={false} onClick={completeTodo} theme={theme} active={todo.completed} />
+      <p
+        className={`todo-title ${theme === "dark" ? "todo-title-dark" : ""} ${todo.completed ? "todo-completed" : ""} ${
+          todo.completed && theme === "dark" ? "todo-completed-dark" : ""
+        }`}
+      >
+        {todo.title}
+      </p>
       {hovered && (
         <button className="delete-todo" arialabelledby="Delete todo" onClick={deleteTodo}>
           <img src={deleteIcon} alt="Delete todo icon" />

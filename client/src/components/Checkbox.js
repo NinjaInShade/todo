@@ -3,8 +3,8 @@ import checkedIcon from "../assets/icon-check.svg";
 
 import "./Checkbox.css";
 
-export default function Checkbox({ onClick, add, theme }) {
-  const [checked, setChecked] = useState(false);
+export default function Checkbox({ onClick, add, theme, active }) {
+  const [checked, setChecked] = useState(active);
 
   function toggleCheckbox(e) {
     e.preventDefault();
@@ -29,7 +29,7 @@ export default function Checkbox({ onClick, add, theme }) {
         onClick={(e) => toggleCheckbox(e)}
         aria-labelledby={add ? "Create new todo" : "Complete todo"}
         type="submit"
-        style={checked ? { background: "var(--primary-check-background)", border: "none", padding: "5px 7px" } : {}}
+        style={checked || active ? { background: "var(--primary-check-background)", border: "none", padding: "5px 7px" } : {}}
       >
         <img src={checkedIcon} alt="checkbox checked icon" style={checked ? {} : { visibility: "hidden" }} />
       </button>
