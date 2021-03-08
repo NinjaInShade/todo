@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import Checkbox from "../Checkbox";
+import TodoSection from "../TodoSection";
 
 import "./TodoPanel.css";
-
-export function TodoSection({ theme, children, className }) {
-  return <div className={`todo-section ${theme === "dark" ? "todo-section-dark" : ""}`}>{children}</div>;
-}
 
 export default function TodoPanel({ loading, todos, theme }) {
   const [value, setValue] = useState("");
 
-  function createTodo() {}
+  function createTodo() {
+    setValue("");
+  }
 
   return (
     <>
-      <form className={`todo-section ${theme === "dark" ? "todo-section-dark" : ""}`}>
+      <form className={`todo-section add-form ${theme === "dark" ? "todo-section-dark" : ""}`}>
         <Checkbox add={true} onClick={createTodo} theme={theme} />
         <label htmlFor="todo" className="todo-label">
           Todo:
@@ -22,12 +21,22 @@ export default function TodoPanel({ loading, todos, theme }) {
         <input
           type="text"
           placeholder="Create a new todo..."
-          className="todo-input"
+          className={`todo-input ${theme === "dark" ? "todo-input-dark" : ""}`}
           id="todo"
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
       </form>
+      <ul className="todos">
+        {!loading ? (
+          todos.todos.map((todo, index) => {
+            return <TodoSection todo={todo} theme={theme} key={index} borderRadius={index === 0} />;
+          })
+        ) : (
+          <p>Loading</p>
+        )}
+        <div className={`todos-filter ${theme === "dark" ? "todos-filter-dark" : ""}`}></div>
+      </ul>
     </>
   );
 }

@@ -1,14 +1,7 @@
-.todo-section {
-  display: flex;
-  align-items: stretch;
-  background: #fff;
-  width: 100%;
-  padding: 20px;
+.add-form {
+  margin-bottom: 1.5rem;
   border-radius: 8px;
-}
-
-.todo-section-dark {
-  background: var(--very-dark-desatured-blue);
+  cursor: initial;
 }
 
 .todo-label {
@@ -16,8 +9,42 @@
 }
 
 .todo-input {
+  color: var(--very-dark-grayish-blue);
+  margin-top: 3px;
+  font-size: 1rem;
   flex-grow: 1;
+  font-weight: 700;
+  min-width: 0;
   border: none;
   outline: none;
   background: none;
+}
+
+.todo-input-dark {
+  color: var(--d-light-grayish-blue);
+}
+
+.todo-input::placeholder {
+  color: var(--dark-grayish-blue);
+}
+
+.todo-input-dark::placeholder {
+  color: var(--d-dark-grayish-blue);
+}
+
+.todos {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.todos-filter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  width: 100%;
+  padding: 20px;
+}
+
+.todos-filter-dark {
+  background: var(--very-dark-desatured-blue);
 }

@@ -1,0 +1,35 @@
+.todo-section {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  background: #fff;
+  border-bottom: 1px solid var(--light-grayish-blue);
+  width: 100%;
+  padding: 20px;
+}
+
+.todo-section-dark {
+  background: var(--very-dark-desatured-blue);
+  border-bottom: 1px solid var(--very-dark-grayish-blue-hover);
+}
+
+.todo-radius {
+  border-radius: 8px 8px 0 0;
+}
+
+.todo-title {
+  color: var(--very-dark-grayish-blue);
+  font-size: 1rem;
+}
+
+.todo-title-dark {
+  color: var(--d-light-grayish-blue);
+}
+
+.delete-todo {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}

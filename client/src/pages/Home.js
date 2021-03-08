@@ -14,9 +14,8 @@ export default function Home({ theme, changeHandler }) {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         setTodos(data);
-        // setLoading(false)
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
