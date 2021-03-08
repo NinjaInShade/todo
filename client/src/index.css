@@ -29,3 +29,17 @@
   --base-font-size: 18px;
   --font-family: "Josefin Sans", sans-serif;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+}
+
+main {
+  min-height: 100vh;
+}

@@ -1,160 +1,32 @@
-.top-bg {
-  width: 96%;
-  min-height: 300px;
-  border-radius: 8px 8px 0px 0px;
-  position: absolute;
-  top: 2%;
-  left: 2%;
-  right: 2%;
-}
-
-.add-todo-container {
-  background: white;
-  z-index: 2;
-  margin: 100px 0 0 0;
-  min-width: 20%;
-  padding: 25px 20px;
-  border-radius: 8px 8px 0px 0px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  -webkit-box-shadow: 9px 10px 43px -15px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 9px 10px 43px -15px rgba(0, 0, 0, 0.75);
-  box-shadow: 9px 10px 43px -15px rgba(0, 0, 0, 0.75);
-}
-
-.add-todo-text {
-  margin: 10px 0 20px 0;
-}
-
-.add-todo-bottom {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
+.background {
   width: 100%;
+  height: 33vh;
+  background: url("../assets/bg-desktop-light.jpg") no-repeat center;
+  background-size: cover;
 }
 
-.add-todo-input {
-  border-radius: 2px;
-  outline: none;
-  padding: 10px 10px;
-  flex-grow: 1;
-  font-size: 1.2rem;
+.background-dark {
+  background: url("../assets/bg-desktop-dark.jpg") no-repeat center;
+  background-size: cover;
 }
 
-.add-todo-bottom-input {
-  display: flex;
-  margin-top: 10px;
+.bottom {
+  height: 67vh;
+  background-color: var(--very-light-gray);
 }
 
-.error-text {
-  margin: 7px 0 0 0;
-  color: #e02d11;
-  font-size: 0.9rem;
+.bottom-dark {
+  background-color: var(--very-dark-blue);
 }
 
-.placeholder-button {
-  outline: none;
-  border: none;
-  color: white;
-  background: none;
-  padding: 10px 25px;
-  margin-left: 15px;
-  font-size: 1.2rem;
-}
-
-.todo-list {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding-bottom: 50px;
-}
-
-.todo {
-  min-width: 20%;
-  background: white;
-  margin-top: 20px;
-  padding: 25px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  -webkit-box-shadow: 0px 0px 24px 3px rgba(0, 0, 0, 0.26);
-  -moz-box-shadow: 0px 0px 24px 3px rgba(0, 0, 0, 0.26);
-  box-shadow: 0px 0px 24px 3px rgba(0, 0, 0, 0.26);
-}
-
-.todo p {
-  margin-block-start: 0;
-  margin-block-end: 0;
-  font-size: 1.2rem;
-  margin-top: 10px;
-  word-wrap: break-word;
-}
-
-.text-wrap {
-  width: 360px;
-}
-
-.icons {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.icons svg {
-  cursor: pointer;
-  padding: 5px;
-}
-
-.input-fix {
-  max-width: none !important;
-}
-
-.icons-inner {
-  margin: 0 25px;
-}
-
-@media (max-width: 450px) {
-  .add-todo-input {
-    max-width: 140px;
+@media (max-width: 375px) {
+  .background {
+    background: url("../assets/bg-mobile-light.jpg") no-repeat center;
+    background-size: cover;
   }
 
-  .placeholder-button {
-    display: none;
-  }
-
-  .text-wrap {
-    width: 260px;
-  }
-}
-
-@media (max-width: 350px) {
-  .add-todo-bottom-input {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
-
-  .add-todo-button {
-    margin: 20px 0 0 0 !important;
-    padding: 8px 25px;
-    width: 100%;
-  }
-
-  .text-wrap {
-    width: 160px;
-  }
-
-  .icons-inner {
-    margin: 0 15px;
-  }
-
-  .input-fix {
-    max-width: 140px !important;
+  .background-dark {
+    background: url("../assets/bg-mobile-dark.jpg") no-repeat center;
+    background-size: cover;
   }
 }
