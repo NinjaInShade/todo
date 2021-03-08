@@ -21,6 +21,10 @@
 .todo-title {
   color: var(--very-dark-grayish-blue);
   font-size: 1rem;
+  max-width: 300px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .todo-title-dark {
@@ -29,9 +33,14 @@
 
 .delete-todo {
   position: absolute;
+  display: none;
   top: 50%;
   right: 20px;
   transform: translateY(-50%);
+}
+
+.delete-todo-hovered {
+  display: initial;
 }
 
 .todo-completed {
@@ -42,4 +51,16 @@
 
 .todo-completed-dark {
   color: var(--d-very-dark-grayish-blue);
+}
+
+@media (max-width: 450px) {
+  .todo-title {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 400px) {
+  .delete-todo {
+    display: initial;
+  }
 }

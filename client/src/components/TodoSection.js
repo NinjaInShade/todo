@@ -60,11 +60,9 @@ export default function TodoSection({ todos, setTodos, todo, theme, borderRadius
       >
         {todo.title}
       </p>
-      {hovered && (
-        <button className="delete-todo" arialabelledby="Delete todo" onClick={deleteTodo}>
-          <img src={deleteIcon} alt="Delete todo icon" />
-        </button>
-      )}
+      <button className={`delete-todo ${hovered ? "delete-todo-hovered" : ""}`} arialabelledby="Delete todo" onClick={deleteTodo}>
+        <img src={deleteIcon} alt="Delete todo icon" />
+      </button>
     </li>
   );
 }
