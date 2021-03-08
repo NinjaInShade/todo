@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Checkbox from "../Checkbox";
 import TodoSection from "../TodoSection";
+import LoadingSpinner from "../LoadingSpinner";
 
 import "./TodoPanel.css";
 
@@ -33,7 +34,9 @@ export default function TodoPanel({ loading, todos, theme }) {
             return <TodoSection todo={todo} theme={theme} key={index} borderRadius={index === 0} />;
           })
         ) : (
-          <p>Loading</p>
+          <div className={`loading ${theme === "dark" ? "loading-dark" : ""}`}>
+            <LoadingSpinner theme={theme} />
+          </div>
         )}
         <div className={`todos-filter ${theme === "dark" ? "todos-filter-dark" : ""}`}></div>
       </ul>
