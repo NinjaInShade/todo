@@ -4,12 +4,27 @@ import deleteIcon from "../assets/icon-cross.svg";
 
 import "./TodoSection.css";
 
-export default function TodoSection({ todo, theme, borderRadius }) {
+export default function TodoSection({ todos, setTodos, todo, theme, borderRadius }) {
   const [hovered, setHovered] = useState(false);
 
   function completeTodo() {}
 
-  function deleteTodo() {}
+  function deleteTodo() {
+    const updated_todos = todos.todos.filter((todoState) => todoState._id !== todo._id);
+
+    fetch(`${process.env.REACT_APP_API_URL}/${todo._id}`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setTodos((prevState) => ({ ...prevState, todos: updated_todos }));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return (
     <li

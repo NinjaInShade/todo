@@ -15,7 +15,7 @@ export default function Checkbox({ onClick, add, theme }) {
     if (add) {
       setTimeout(() => {
         setChecked(false);
-      }, 500);
+      }, 100);
     }
 
     // Run external onClick function (create or complete the todo)

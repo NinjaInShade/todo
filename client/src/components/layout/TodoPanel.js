@@ -45,7 +45,7 @@ export default function TodoPanel({ loading, setTodos, todos, theme }) {
       <ul className="todos">
         {!loading ? (
           todos.todos.map((todo, index) => {
-            return <TodoSection todo={todo} theme={theme} key={index} borderRadius={index === 0} />;
+            return <TodoSection todo={todo} theme={theme} key={index} borderRadius={index === 0} todos={todos} setTodos={setTodos} />;
           })
         ) : (
           <div className={`loading ${theme === "dark" ? "loading-dark" : ""}`}>
