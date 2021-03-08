@@ -14,7 +14,7 @@ export default function Content({ theme, changeHandler, todos, loading }) {
           <img src={theme === "dark" ? sun : moon} alt="change theme icon" />
         </button>
       </header>
-      <TodoPanel todos={todos} loading={loading} />
+      <TodoPanel todos={todos} loading={loading} theme={theme} />
     </section>
   );
 }

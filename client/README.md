@@ -13,6 +13,7 @@ UI made with the help of the frontend mentor todo challenge <https://www.fronten
 
 # Future ideas:
 
+- Hover state on checkbox should be the check-gradient, but is a pain to do in CSS...
 - Drag and drop to reorder items on the list
 - Add login/logout functionality ( with oAuth for maximum security )
 - Relate every todo to a user , user can have multiple todos

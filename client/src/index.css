@@ -6,7 +6,7 @@
 
   /* primary */
   --primary-bright-blue: hsl(220, 98%, 61%);
-  --primary-check-background: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+  --primary-check-background: linear-gradient(135deg, rgba(87, 221, 240, 1) 0%, rgba(192, 88, 240, 1) 100%);
 
   /* NEUTRAL */
   /* light theme */

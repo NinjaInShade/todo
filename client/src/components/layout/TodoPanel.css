@@ -1,0 +1,23 @@
+.todo-section {
+  display: flex;
+  align-items: stretch;
+  background: #fff;
+  width: 100%;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.todo-section-dark {
+  background: var(--very-dark-desatured-blue);
+}
+
+.todo-label {
+  display: none;
+}
+
+.todo-input {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  background: none;
+}

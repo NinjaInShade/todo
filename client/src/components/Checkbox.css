@@ -1,0 +1,17 @@
+.checkbox-container {
+  padding: 0 20px 0 5px;
+}
+
+.custom-checkbox {
+  border: 1px solid var(--light-grayish-blue);
+  border-radius: 50%;
+  padding: 4px 6px;
+}
+
+.custom-checkbox:hover {
+  border: 1px solid rgba(87, 221, 240, 1);
+}
+
+.custom-checkbox-dark {
+  border: 1px solid var(--very-dark-grayish-blue);
+}
