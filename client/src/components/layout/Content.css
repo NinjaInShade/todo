@@ -33,7 +33,7 @@
 @media (max-width: 700px) {
   .content-container {
     width: 100%;
-    top: 5vh;
+    top: 2px;
   }
 
   .title {
