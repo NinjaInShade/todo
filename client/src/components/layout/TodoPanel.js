@@ -83,21 +83,21 @@ export default function TodoPanel({ loading, setTodos, todos, theme }) {
             <p className={`todo-clear ${theme === "dark" ? "todo-clear-dark" : ""}`}>Clear Completed</p>
           </button>
         </div>
-        <div className={`todo-section mobile-filters ${theme === "dark" ? "todo-section-dark" : ""}`}>
-          <button onClick={() => setFilter("All")}>
-            {" "}
-            <p className={`todo-filter ${theme === "dark" ? "todo-filter-dark" : ""} ${filter === "All" ? "todo-filter-active" : ""}`}>All</p>
-          </button>
-          <button onClick={() => setFilter("Active")}>
-            <p className={`todo-filter ${theme === "dark" ? "todo-filter-dark" : ""} ${filter === "Active" ? "todo-filter-active" : ""}`}>Active</p>
-          </button>
-          <button onClick={() => setFilter("Completed")}>
-            <p className={`todo-filter ${theme === "dark" ? "todo-filter-dark" : ""} ${filter === "Completed" ? "todo-filter-active" : ""}`}>
-              Completed
-            </p>
-          </button>
-        </div>
       </ul>
+      <div className={`todo-section mobile-filters ${theme === "dark" ? "todo-section-dark" : ""}`}>
+        <button onClick={() => setFilter("All")}>
+          {" "}
+          <p className={`todo-filter ${theme === "dark" ? "todo-filter-dark" : ""} ${filter === "All" ? "todo-filter-active" : ""}`}>All</p>
+        </button>
+        <button onClick={() => setFilter("Active")}>
+          <p className={`todo-filter ${theme === "dark" ? "todo-filter-dark" : ""} ${filter === "Active" ? "todo-filter-active" : ""}`}>Active</p>
+        </button>
+        <button onClick={() => setFilter("Completed")}>
+          <p className={`todo-filter ${theme === "dark" ? "todo-filter-dark" : ""} ${filter === "Completed" ? "todo-filter-active" : ""}`}>
+            Completed
+          </p>
+        </button>
+      </div>
     </>
   );
 }
