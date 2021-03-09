@@ -111,7 +111,22 @@
   border-radius: 8px;
 }
 
+.reorder {
+  text-align: center;
+  font-style: italic;
+  color: var(--dark-grayish-blue);
+  margin: 3rem 0;
+}
+
+.reorder-dark {
+  color: var(--d-very-dark-grayish-blue);
+}
+
 @media (max-width: 550px) {
+  .todo-input {
+    font-size: 1rem;
+  }
+
   .filters-container {
     display: none;
   }

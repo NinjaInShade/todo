@@ -23,9 +23,7 @@ export default function Home({ theme, changeHandler }) {
   }, []);
 
   return (
-    <main>
-      <div className={`background ${theme === "dark" ? "background-dark" : ""}`}></div>
-      <div className={`bottom ${theme === "dark" ? "bottom-dark" : ""}`}></div>
+    <main className={`container ${theme === "dark" ? "container-dark" : ""}`}>
       <Content theme={theme} changeHandler={changeHandler} todos={todos} setTodos={setTodos} loading={loading} />
     </main>
   );

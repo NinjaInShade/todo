@@ -7,7 +7,7 @@ import "./Content.css";
 
 export default function Content({ theme, changeHandler, todos, setTodos, loading }) {
   return (
-    <section className="content-container">
+    <section className="content-container" id="content">
       <header className="header">
         <h1 className="title">TODO</h1>
         <button className="change-theme" onClick={changeHandler} tabIndex="0" aria-labelledby="Change theme button">
