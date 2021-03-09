@@ -2,7 +2,8 @@
   cursor: pointer;
   position: relative;
   display: flex;
-  align-items: stretch;
+  align-items: center;
+  justify-content: space-between;
   background: #fff;
   border-bottom: 1px solid var(--light-grayish-blue);
   width: 100%;
@@ -20,8 +21,9 @@
 
 .todo-title {
   color: var(--very-dark-grayish-blue);
+  padding-right: 5px;
   font-size: 1rem;
-  max-width: 300px;
+  flex-grow: 1;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -32,14 +34,11 @@
 }
 
 .delete-todo {
-  position: absolute;
   display: none;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
 }
 
-.delete-todo-hovered {
+.delete-todo-hovered,
+.delete-todo:hover {
   display: initial;
 }
 
@@ -53,14 +52,14 @@
   color: var(--d-very-dark-grayish-blue);
 }
 
-@media (max-width: 450px) {
-  .todo-title {
-    max-width: 200px;
+@media (max-width: 500px) {
+  .delete-todo {
+    display: initial;
   }
 }
 
-@media (max-width: 400px) {
-  .delete-todo {
-    display: initial;
+@media (max-width: 450px) {
+  .todo-title {
+    font-size: 0.8rem;
   }
 }

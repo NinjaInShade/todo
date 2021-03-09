@@ -47,16 +47,14 @@ export default function TodoSection({ todos, setTodos, todo, theme, borderRadius
   }
 
   return (
-    <li
-      className={`todo-section  ${theme === "dark" ? "todo-section-dark" : ""} ${borderRadius ? "todo-radius" : ""}`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
+    <li className={`todo-section  ${theme === "dark" ? "todo-section-dark" : ""} ${borderRadius ? "todo-radius" : ""}`}>
       <Checkbox add={false} onClick={completeTodo} theme={theme} active={todo.completed} />
       <p
         className={`todo-title ${theme === "dark" ? "todo-title-dark" : ""} ${todo.completed ? "todo-completed" : ""} ${
           todo.completed && theme === "dark" ? "todo-completed-dark" : ""
         }`}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
       >
         {todo.title}
       </p>
