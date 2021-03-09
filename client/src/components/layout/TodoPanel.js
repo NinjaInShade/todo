@@ -60,9 +60,24 @@ export default function TodoPanel({ loading, setTodos, todos, theme }) {
           </div>
         )}
         {!loading &&
+          filter === "All" &&
           todos.todos.map((todo, index) => {
             return <TodoSection todo={todo} theme={theme} key={index} borderRadius={index === 0} todos={todos} setTodos={setTodos} />;
           })}
+        {!loading &&
+          filter === "Active" &&
+          todos.todos
+            .filter((todoState) => !todoState.completed)
+            .map((todo, index) => {
+              return <TodoSection todo={todo} theme={theme} key={index} borderRadius={index === 0} todos={todos} setTodos={setTodos} />;
+            })}
+        {!loading &&
+          filter === "Completed" &&
+          todos.todos
+            .filter((todoState) => todoState.completed)
+            .map((todo, index) => {
+              return <TodoSection todo={todo} theme={theme} key={index} borderRadius={index === 0} todos={todos} setTodos={setTodos} />;
+            })}
         <div className={`todos-filter ${theme === "dark" ? "todos-filter-dark" : ""}`}>
           <p className={`todo-items ${theme === "dark" ? "todo-items-dark" : ""}`}>{itemsLeft} items left</p>
           <div className="filters-container">
