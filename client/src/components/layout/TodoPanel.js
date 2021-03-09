@@ -35,6 +35,21 @@ export default function TodoPanel({ loading, setTodos, todos, theme }) {
 
   function clearCompleted(e) {
     e.preventDefault();
+
+    const updated_todos = todos.todos.filter((todoState) => !todoState.completed);
+
+    fetch(`${process.env.REACT_APP_API_URL}/completed`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setTodos((prevState) => ({ ...prevState, todos: updated_todos }));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (

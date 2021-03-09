@@ -84,6 +84,20 @@ router.patch("/:id", async function (req, res, next) {
   }
 });
 
+router.delete("/completed", function (req, res, next) {
+  Todo.deleteMany({ completed: true })
+    .then(() => {
+      return res.status(200).json({
+        message: "Completed todos successfully deleted.",
+      });
+    })
+    .catch((err) => {
+      const error = new Error("Failed to delete");
+      error.status = 500;
+      return next(error);
+    });
+});
+
 // Delete - delete a todo by ID
 router.delete("/:id", async function (req, res, next) {
   const id = req.params.id;
