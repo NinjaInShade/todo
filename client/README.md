@@ -8,10 +8,10 @@ UI made with the help of the frontend mentor todo challenge <https://www.fronten
 - Mark todos as complete ✔
 - Delete todos from the list ✔
 - dark/light mode toggle ✔
-- Filter by all/active/complete todos ✘
-- Clear all completed todos ✘
+- Filter by all/active/complete todos ✔
+- Clear all completed todos ✔
 
-# Future ideas:
+## Future ideas:
 
 - Hover state on checkbox should be the check-gradient, but is a pain to do in CSS...
 - Drag and drop to reorder items on the list
