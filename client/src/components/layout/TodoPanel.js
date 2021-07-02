@@ -213,7 +213,7 @@ export default function TodoPanel({ loading, setTodos, todos, theme }) {
           </p>
         </button>
       </div>
-      <p className={`reorder ${theme === 'dark' ? 'reorder-dark' : ''}`}>*Not added* Drag and drop to reorder list</p>
+      <p className={`reorder ${theme === 'dark' ? 'reorder-dark' : ''}`}>Drag and drop to reorder list</p>
     </>
   );
 }
