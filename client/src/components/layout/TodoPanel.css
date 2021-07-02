@@ -69,6 +69,7 @@
 
 .todo-items,
 .todo-clear {
+  transition: all 0.2s ease-in-out;
   color: var(--light-grayish-blue);
 }
 
@@ -78,6 +79,7 @@
 }
 
 .todo-filter {
+  transition: all 0.2s ease-in-out;
   color: var(--dark-grayish-blue);
   font-weight: 700;
   font-size: 0.9rem;
