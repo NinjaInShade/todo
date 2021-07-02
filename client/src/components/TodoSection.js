@@ -1,10 +1,13 @@
-import React, { useState } from "react";
-import Checkbox from "./Checkbox";
-import deleteIcon from "../assets/icon-cross.svg";
+import React, { useState } from 'react';
+import Checkbox from './Checkbox';
+import deleteIcon from '../assets/icon-cross.svg';
 
-import "./TodoSection.css";
+// Drag n Drop
+import { Draggable } from 'react-beautiful-dnd';
 
-export default function TodoSection({ todos, setTodos, todo, theme, borderRadius }) {
+import './TodoSection.css';
+
+export default function TodoSection({ todos, setTodos, todo, theme, borderRadius, id }) {
   const [hovered, setHovered] = useState(false);
 
   function completeTodo() {
@@ -12,8 +15,8 @@ export default function TodoSection({ todos, setTodos, todo, theme, borderRadius
     const existing_todo_index = todos.todos.findIndex((todoState) => todoState._id === todo._id);
 
     fetch(`${process.env.REACT_APP_API_URL}/${todo._id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ completed: !todo.completed }),
     })
       .then((res) => {
@@ -33,7 +36,7 @@ export default function TodoSection({ todos, setTodos, todo, theme, borderRadius
     const updated_todos = todos.todos.filter((todoState) => todoState._id !== todo._id);
 
     fetch(`${process.env.REACT_APP_API_URL}/${todo._id}`, {
-      method: "DELETE",
+      method: 'DELETE',
     })
       .then((res) => {
         return res.json();
@@ -47,20 +50,35 @@ export default function TodoSection({ todos, setTodos, todo, theme, borderRadius
   }
 
   return (
-    <li className={`todo-section  ${theme === "dark" ? "todo-section-dark" : ""} ${borderRadius ? "todo-radius" : ""}`}>
-      <Checkbox add={false} onClick={completeTodo} theme={theme} active={todo.completed} />
-      <p
-        className={`todo-title ${theme === "dark" ? "todo-title-dark" : ""} ${todo.completed ? "todo-completed" : ""} ${
-          todo.completed && theme === "dark" ? "todo-completed-dark" : ""
-        }`}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
-        {todo.title}
-      </p>
-      <button className={`delete-todo ${hovered ? "delete-todo-hovered" : ""}`} arialabelledby="Delete todo" onClick={deleteTodo}>
-        <img src={deleteIcon} alt="Delete todo icon" />
-      </button>
-    </li>
+    <Draggable key={id} draggableId={id.toString()} index={id}>
+      {(provided) => (
+        <li
+          className={`todo-section  ${theme === 'dark' ? 'todo-section-dark' : ''} ${
+            borderRadius ? 'todo-radius' : ''
+          }`}
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <Checkbox add={false} onClick={completeTodo} theme={theme} active={todo.completed} />
+          <p
+            className={`todo-title ${theme === 'dark' ? 'todo-title-dark' : ''} ${
+              todo.completed ? 'todo-completed' : ''
+            } ${todo.completed && theme === 'dark' ? 'todo-completed-dark' : ''}`}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+          >
+            {todo.title}
+          </p>
+          <button
+            className={`delete-todo ${hovered ? 'delete-todo-hovered' : ''}`}
+            arialabelledby='Delete todo'
+            onClick={deleteTodo}
+          >
+            <img src={deleteIcon} alt='Delete todo icon' />
+          </button>
+        </li>
+      )}
+    </Draggable>
   );
 }
