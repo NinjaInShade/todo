@@ -103,6 +103,7 @@ export default function TodoPanel({ loading, setTodos, todos, theme }) {
                     <TodoSection
                       todo={todo}
                       theme={theme}
+                      key={index}
                       id={index}
                       borderRadius={index === 0}
                       todos={todos}
@@ -119,6 +120,7 @@ export default function TodoPanel({ loading, setTodos, todos, theme }) {
                       <TodoSection
                         todo={todo}
                         theme={theme}
+                        key={index}
                         id={index}
                         borderRadius={index === 0}
                         todos={todos}
@@ -135,6 +137,7 @@ export default function TodoPanel({ loading, setTodos, todos, theme }) {
                       <TodoSection
                         todo={todo}
                         theme={theme}
+                        key={index}
                         id={index}
                         borderRadius={index === 0}
                         todos={todos}

@@ -50,7 +50,7 @@ export default function TodoSection({ todos, setTodos, todo, theme, borderRadius
   }
 
   return (
-    <Draggable key={id} draggableId={id.toString()} index={id}>
+    <Draggable draggableId={id.toString()} index={id}>
       {(provided) => (
         <li
           className={`todo-section  ${theme === 'dark' ? 'todo-section-dark' : ''} ${
