@@ -57,6 +57,12 @@ export default function TodoPanel({ loading, setTodos, todos, theme }) {
 
   // Updates the todos state if todos are re-ordered
   function handleOnDragEnd(result) {
+    // Check if todo is dropped outside of bounds (outside of list boundaries)
+    if (!result.destination) {
+      return;
+    }
+
+    // Create new updated array, then update current state
     const newTodos = Array.from(todos.todos);
     const [reorderedItem] = newTodos.splice(result.source.index, 1);
 
