@@ -27,7 +27,7 @@
 
   /* TYPOGRAPHY */
   --base-font-size: 18px;
-  --font-family: "Josefin Sans", sans-serif;
+  --font-family: 'Josefin Sans', sans-serif;
 }
 
 * {
@@ -37,10 +37,14 @@
   box-sizing: border-box;
 }
 
-button {
-  cursor: pointer;
-}
-
 main {
   min-height: 100vh;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background: none;
+  padding: 0;
 }
