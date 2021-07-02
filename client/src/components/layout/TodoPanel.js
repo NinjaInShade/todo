@@ -55,6 +55,16 @@ export default function TodoPanel({ loading, setTodos, todos, theme }) {
       });
   }
 
+  // Updates the todos state if todos are re-ordered
+  function handleOnDragEnd(result) {
+    const newTodos = Array.from(todos.todos);
+    const [reorderedItem] = newTodos.splice(result.source.index, 1);
+
+    newTodos.splice(result.destination.index, 0, reorderedItem);
+
+    setTodos({ todos: newTodos });
+  }
+
   return (
     <>
       <form className={`todo-section add-form ${theme === 'dark' ? 'todo-section-dark' : ''}`}>
@@ -71,7 +81,7 @@ export default function TodoPanel({ loading, setTodos, todos, theme }) {
           onChange={(e) => setValue(e.target.value)}
         />
       </form>
-      <DragDropContext>
+      <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId='todos'>
           {(provided) => (
             <ul className='todos' id='todos' {...provided.droppableProps} ref={provided.innerRef}>
