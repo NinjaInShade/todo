@@ -15,6 +15,7 @@ UI made with the help of the frontend mentor todo challenge <https://www.fronten
 ## Future ideas:
 
 - Hover state on checkbox should be the check-gradient, but is a pain to do in CSS...
+- Save new order if todos are re-arranged (frontend/backend)
 - Add login/logout functionality ( with oAuth for maximum security )
 - Relate every todo to a user , user can have multiple todos
 - Scheduled todos
